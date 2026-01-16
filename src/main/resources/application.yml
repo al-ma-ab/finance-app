@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: finance-app
+  datasource:
+    url: jdbc:postgresql://localhost:5432/finance_app
+    username: finance_user
+    password: finance_pass
+    driverClassName: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
