@@ -32,9 +32,9 @@ public class AuthController {
     /**
      * Login de usuário
      */
-//    @PostMapping("/login")
-//    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
-//       String token = authService.login(request);
-//        return ResponseEntity.ok(new AuthResponse(token));
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+       String token = authService.login(request);
+        return ResponseEntity.ok(new AuthResponse(token));
+    }
 }
