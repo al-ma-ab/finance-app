@@ -1,9 +1,11 @@
 package io.com.github.al_ma_ab.finance_app.service;
 
+import io.com.github.al_ma_ab.finance_app.dto.AuthResponse;
 import io.com.github.al_ma_ab.finance_app.dto.LoginRequest;
 import io.com.github.al_ma_ab.finance_app.dto.RegisterRequest;
 import io.com.github.al_ma_ab.finance_app.model.User;
 import io.com.github.al_ma_ab.finance_app.repository.UserRepository;
+import io.com.github.al_ma_ab.finance_app.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,8 +19,10 @@ public class AuthService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtService jwtService;
 
-    public User register(RegisterRequest request) {
+    public AuthResponse register(RegisterRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new RuntimeException("Email já cadastrado");
@@ -29,7 +33,11 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        return userRepository.save(user);
+        userRepository.save(user);
+
+        //gera JWT
+        String token = jwtService.generateToken(user.getEmail());
+        return new AuthResponse(token);
     }
 
     public String login(LoginRequest request){
@@ -42,7 +50,7 @@ public class AuthService {
 
         // Por enquanto vamos retornar um token "fake" só para validar o fluxo.
         // Amanhã a gente troca isso por JWT de verdade.
-        return "TOKEN_TEMPORARIO";
+        return jwtService.generateToken(user.getEmail());
     }
 
 

@@ -1,7 +1,6 @@
 package io.com.github.al_ma_ab.finance_app.controller;
 
 import io.com.github.al_ma_ab.finance_app.dto.RegisterRequest;
-import io.com.github.al_ma_ab.finance_app.model.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import io.com.github.al_ma_ab.finance_app.dto.AuthResponse;
@@ -23,10 +22,15 @@ public class AuthController {
     /**
      * Cadastro de usuário
      */
-    @PostMapping("/register")
+    /*@PostMapping("/register")
     public ResponseEntity<User> register(@Valid @RequestBody RegisterRequest request) {
         User user = authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }*/
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
+        AuthResponse response = authService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     /**
