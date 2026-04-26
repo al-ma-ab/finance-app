@@ -94,34 +94,9 @@ Login de usuário
 - Configuração inicial de segurança
 - Ambiente Docker configurado
 
-## Próximos passos
-- Implementação de autenticação com JWT - **SENDO IMPLEMENTADO**
+## Próximos passos  - **SENDO IMPLEMENTADO**
+- Implementação de autenticação com JWT
 - Proteção de endpoints com token
 - Criação de contas financeiras compartilhadas
 - Controle de acesso por usuário
 - Integração com frontend Web e App Mobile
-
-## 🔐 Autenticação e Segurança
-
-A autenticação da aplicação é baseada em usuários cadastrados no sistema,
-com controle de acesso realizado pelo Spring Security.
-
-### 👤 Usuário (User)
-
-Cada usuário possui:
-- Identificador único (UUID)
-- Nome
-- Email (único)
-- Senha criptografada (BCrypt)
-
-O identificador UUID foi escolhido para:
-- Evitar enumeração de usuários
-- Facilitar escalabilidade futura
-- Aumentar a segurança da API
-
----
-
-### 🔑 Cadastro de Usuário
-
-Endpoint responsável por criar novos usuários no sistema.
-
