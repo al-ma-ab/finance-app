@@ -1,4 +1,4 @@
-package io.com.github.al_ma_ab.finance_app.condig;
+package io.com.github.al_ma_ab.finance_app.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

@@ -17,4 +17,7 @@ public interface AccountUserRepository extends JpaRepository<AccountUser, UUID> 
 
     // Busca o vínculo especifico (evita duplicidade e ajuda em validações)
     Optional<AccountUser> findByAccountIdAndUserId(UUID accountId, UUID userId);
+
+    // vrifica se a conta existe
+    boolean existsByAccountIdAndUserId(UUID accountId, UUID userId);
 }

@@ -7,18 +7,22 @@ import io.com.github.al_ma_ab.finance_app.dto.AuthResponse;
 import io.com.github.al_ma_ab.finance_app.dto.LoginRequest;
 import io.com.github.al_ma_ab.finance_app.service.AuthService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
+    //@Autowired
+    //private AuthService authService;
+    private final AuthService authService;
 
+    public AuthController(AuthService authService){
+        this.authService = authService;
+    }
     /**
      * Cadastro de usuário
      */
@@ -41,4 +45,5 @@ public class AuthController {
        String token = authService.login(request);
         return ResponseEntity.ok(new AuthResponse(token));
     }
+
 }

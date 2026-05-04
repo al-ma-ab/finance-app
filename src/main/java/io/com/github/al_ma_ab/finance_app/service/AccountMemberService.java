@@ -1,6 +1,7 @@
 package io.com.github.al_ma_ab.finance_app.service;
 
 import io.com.github.al_ma_ab.finance_app.dto.AccountResponse;
+import io.com.github.al_ma_ab.finance_app.exception.ResourceNotFoundException;
 import io.com.github.al_ma_ab.finance_app.model.AccountRole;
 import io.com.github.al_ma_ab.finance_app.model.AccountUser;
 import io.com.github.al_ma_ab.finance_app.repository.AccountRepository;
@@ -36,10 +37,10 @@ public class AccountMemberService {
     public AccountResponse inviteMember(UUID accountId, String inviterEmail, String invitedEmail) {
 
         var inviter = userRepository.findByEmail(inviterEmail)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário logado não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário logado não encontrado"));
 
         var account = accountRepository.findById(accountId)
-                .orElseThrow(() -> new IllegalArgumentException("Conta não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Conta não encontrada"));
 
         // 1) Checar se inviter é OWNER da conta
         var inviterLink = accountUserRepository.findByAccountIdAndUserId(accountId, inviter.getId())
